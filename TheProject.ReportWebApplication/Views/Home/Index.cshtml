@@ -1,0 +1,372 @@
+﻿@model TheProject.ReportWebApplication.Models.HomeModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <h2 class="margin-50">Dashboard</h2>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 margin-top-25">
+
+            <div class="row">
+                <label class="control-label col-lg-2 col-md-2 col-sm-12 padding-5">Region</label>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    @Html.DropDownList("Region", (SelectList)ViewBag.Regions, string.Empty, new { @class = "form-control", @id = "dropDownId" })
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <input type="submit" id="filterByRegionBtn" value="Filter By Region" class="btn btn-success" />
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12">
+                    <input type="submit" id="claerBtn" value="Clear" class="btn btn-light claer-btn" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-building" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="PropertiesCount">@Model.PropertiesCount</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Number of properties</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-hourglass-half" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="PropertiesPercentage">@Model.PropertiesPercentage</span>%</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Signed off properties</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-tree" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="vacantPercentage">@Model.VacantPercentage</span>%</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Vacant Status</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-building" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF" id="noOfImprovements">@Model.NoOfImprovements</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Number of improvements</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <div class="dashboard-icon"><i style="font-size: xx-large;" class="fa fa-level-up" aria-hidden="true"></i></div>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="ImprovementsSize">@Model.ImprovementsSize</span><span>m&#178;</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Size of improvements</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <div class="dashboard-icon"><i style="font-size: xx-large; color:#FFFFFF" class="fa fa-arrows-h" aria-hidden="true"></i></div>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="OccupationStatus">@Model.OccupationStatus</span><span>%</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Occupation Status</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="carouselExampleControls" class="carousel slide carousel-background" data-ride="carousel">
+        <div class="carousel-inner">
+            <i class="fa fa-chevron-left carousel-control-prev-icon" aria-hidden="true" id="carouselPrevious"></i>
+            <div class="row clearfix carousel-item" style="width: 93% !important; margin-bottom: 15px">
+                <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                    <canvas id="demo" width="200" height="200"></canvas><br />
+                    <label class="propertyDescription" style="color: yellow" id="demoText">Public open space</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                    <canvas id="demo1" width="200" height="200"></canvas><br />
+                    <label class="propertyDescription" style="color: red" id="demo1Text">Roads</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                    <canvas id="demo2" width="200" height="200"></canvas><br />
+                    <label class="propertyDescription" style="color: white" id="demo2Text">Agriculture</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                    <canvas id="demo3" width="200" height="200"></canvas><br />
+                    <label class="propertyDescription" style="color: orange" id="demo3Text">Special</label>
+                </div>
+            </div>
+            <i class="fa fa-chevron-right carousel-control-next-icon" aria-hidden="true" id="carouselNext"></i>
+        </div>
+    </div>
+    <div class="clearfix margin-55">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 width-100">
+                <label class="header2">Property Type / Zoning</label>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix margin-55">
+        <div class="col-lg-12" id="propertyTypeTableDiv">
+            <div class="col-lg-12" style="background-color: lightgray;border-radius: .55rem; margin-bottom: 30px; transition: .5s; border: 0;    padding: 15px;
+                        position: relative;
+                        width: 100%;
+                            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);">
+
+                <table class="table table-hover" id="records_table">
+                    <thead style="background-color: #101e45;color: white;">
+                        <tr>
+                            <th>Property Type</th>
+                            <th>Signed Off</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var dataPoints = [];
+    var loopCount = 0;
+    var firstPlace = 0;
+    var secondPlace = 1;
+    var theirthPlace = 2;
+    var forthPlace = 3;
+
+
+    $("#propertyTypeTableDiv").fadeIn();   
+
+    $('#carouselNext').click(function () {
+        setCarousel(dataPoints);
+    });
+
+    $('#carouselPrevious').click(function () {
+
+        var dataPointsList = dataPoints;
+        firstPlace = firstPlace - 4;
+        secondPlace = secondPlace - 4;
+        theirthPlace = theirthPlace - 4;
+        forthPlace = forthPlace - 4;
+
+        if (firstPlace < 0)
+            firstPlace = 0;
+        if (secondPlace < 0)
+            secondPlace = 1;
+        if (theirthPlace < 0)
+            theirthPlace = 2;
+        if (forthPlace < 0)
+            forthPlace = 3;
+
+        if (dataPointsList.length >= 0) {
+            $("#demo").gauge(0, { min: 0, max: 100, unit: "/0", color: "yellow", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo1").gauge(0, { min: 0, max: 100, unit: "/0", color: "red", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo2").gauge(0, { min: 0, max: 100, unit: "/0", color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo3").gauge(0, { min: 0, max: 100, unit: "/0", color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demoText").empty().append("").find('#demoText');
+            $("#demo2Text").empty().append("").find('#demo2Text');
+            $("#demo3Text").empty().append("").find('#demo3Text');
+            $("#demo1Text").empty().append("").find('#demo1Text');
+
+            if (dataPointsList[firstPlace] != undefined) {
+                $("#demo").gauge(dataPointsList[firstPlace].Y, { min: 0, max: dataPointsList[firstPlace].Total, unit: "/" + dataPointsList[firstPlace].Total, color: "yellow", colorAlpha: 3, bgcolor: "#696969", type: "default" });
+                $("#demoText").empty().append(dataPointsList[firstPlace].Label).find('#demoText');
+            }
+            if (dataPointsList[secondPlace] != undefined) {
+                $("#demo1").gauge(dataPointsList[secondPlace].Y, { min: 0, max: dataPointsList[secondPlace].Total, unit: "/" + dataPointsList[secondPlace].Total, color: "red", colorAlpha: 2, bgcolor: "#696969", type: "default" });
+                $("#demo1Text").empty().append(dataPointsList[secondPlace].Label).find('#demo1Text');
+            }
+            if (dataPointsList[theirthPlace] != undefined) {
+                $("#demo2").gauge(dataPointsList[theirthPlace].Y, { min: 0, max: dataPointsList[theirthPlace].Total, unit: "/" + dataPointsList[theirthPlace].Total, color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                $("#demo2Text").empty().append(dataPointsList[theirthPlace].Label).find('#demo2Text');
+            }
+            if (dataPointsList[forthPlace] != undefined) {
+                $("#demo3").gauge(dataPointsList[forthPlace].Y, { min: 0, max: dataPointsList[forthPlace].Total, unit: "/" + dataPointsList[forthPlace].Total, color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                $("#demo3Text").empty().append(dataPointsList[forthPlace].Label).find('#demo3Text');
+            }
+
+            if (dataPointsList[firstPlace] == undefined || dataPointsList[secondPlace] == undefined || dataPointsList[theirthPlace] == undefined || dataPointsList[forthPlace] == undefined) {
+               
+            } 
+        }     
+    });
+
+    function setCarousel(dataPointsList) {    
+        if (dataPointsList.length >= 0) {
+            $("#demo").gauge(0, { min: 0, max: 100, unit: "/0", color: "yellow", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo1").gauge(0, { min: 0, max: 100, unit: "/0", color: "red", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo2").gauge(0, { min: 0, max: 100, unit: "/0", color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demo3").gauge(0, { min: 0, max: 100, unit: "/0", color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+            $("#demoText").empty().append("").find('#demoText');
+            $("#demo2Text").empty().append("").find('#demo2Text');
+            $("#demo3Text").empty().append("").find('#demo3Text');
+            $("#demo1Text").empty().append("").find('#demo1Text');
+
+                if (dataPointsList[firstPlace] != undefined) {
+                    $("#demo").gauge(dataPointsList[firstPlace].Y, { min: 0, max: dataPointsList[firstPlace].Total, unit: "/" + dataPointsList[firstPlace].Total, color: "yellow", colorAlpha: 3, bgcolor: "#696969", type: "default" });
+                    $("#demoText").empty().append(dataPointsList[firstPlace].Label).find('#demoText');
+                }
+                if (dataPointsList[secondPlace] != undefined) {
+                    $("#demo1").gauge(dataPointsList[secondPlace].Y, { min: 0, max: dataPointsList[secondPlace].Total, unit: "/" + dataPointsList[secondPlace].Total, color: "red", colorAlpha: 2, bgcolor: "#696969", type: "default" });
+                    $("#demo1Text").empty().append(dataPointsList[secondPlace].Label).find('#demo1Text');
+                }
+                if (dataPointsList[theirthPlace] != undefined) {
+                    $("#demo2").gauge(dataPointsList[theirthPlace].Y, { min: 0, max: dataPointsList[theirthPlace].Total, unit: "/" + dataPointsList[theirthPlace].Total, color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    $("#demo2Text").empty().append(dataPointsList[theirthPlace].Label).find('#demo2Text');
+                }
+                if (dataPointsList[forthPlace] != undefined) {
+                    $("#demo3").gauge(dataPointsList[forthPlace].Y, { min: 0, max: dataPointsList[forthPlace].Total, unit: "/" + dataPointsList[forthPlace].Total, color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    $("#demo3Text").empty().append(dataPointsList[forthPlace].Label).find('#demo3Text');
+                }
+
+                if (dataPointsList[firstPlace] == undefined || dataPointsList[secondPlace] == undefined || dataPointsList[theirthPlace] == undefined || dataPointsList[forthPlace] == undefined) {
+
+                } else {
+                    loopCount = loopCount + 1;
+                    firstPlace = firstPlace + 4;
+                    secondPlace = secondPlace + 4;
+                    theirthPlace = theirthPlace + 4;
+                    forthPlace = forthPlace + 4;
+                }
+           
+        }      
+    }
+
+    $('#claerBtn').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/NewChart",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chData) {
+                var aData = chData;
+                $("#noOfImprovements").empty().append(aData[3]).find('#noOfImprovements');
+                $("#PropertiesCount").empty().append(aData[4]).find('#PropertiesCount');
+                $("#ImprovementsSize").empty().append(aData[5]).find('#ImprovementsSize');
+                $("#OccupationStatus").empty().append(aData[6]).find('#OccupationStatus');
+                $("#PropertiesPercentage").empty().append(aData[7]).find('#PropertiesPercentage');
+                $("#vacantPercentage").empty().append(aData[8]).find('#vacantPercentage');                
+                var dsf = aData[7] + '%';
+                $("#propertiesPercentageProgressbar").css({ width: dsf });
+                dataPoints = aData[9];
+                setCarousel(dataPoints);
+                loopCount = 0;
+                firstPlace = 0;
+                secondPlace = 1;
+                theirthPlace = 2;
+                forthPlace = 3;
+                $('#records_table tbody').empty();
+                var trHTML = '';   
+                $.each(aData[9], function (i, item) {
+                    if (item.Label.toLowerCase().trim() == 'public open space') {
+                        $("#demo").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "yellow", colorAlpha: 3, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'roads') {
+                        $("#demo1").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "red", colorAlpha: 2, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'agriculture') {
+                        $("#demo2").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'special') {
+                        $("#demo3").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    }
+                    trHTML += '<tr><td>' + item.Label + '</td><td>' + item.Y + '</td><td>' + item.Total + '</td></tr>';
+                });
+                $('#records_table').append(trHTML);
+            }
+        });
+    });
+
+    $('#filterByRegionBtn').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Home/NewChart",
+            dataType: "json",
+            data: { selectedRegion: $('#dropDownId :selected').text() },
+            success: function (chData) {
+                var aData = chData;
+                $("#noOfImprovements").empty().append(aData[3]).find('#noOfImprovements');
+                $("#PropertiesCount").empty().append(aData[4]).find('#PropertiesCount');
+                $("#ImprovementsSize").empty().append(aData[5]).find('#ImprovementsSize');
+                $("#OccupationStatus").empty().append(aData[6]).find('#OccupationStatus');
+                $("#PropertiesPercentage").empty().append(aData[7]).find('#PropertiesPercentage');
+                $("#vacantPercentage").empty().append(aData[8]).find('#vacantPercentage');  
+                var dsf = aData[7] + '%';
+                $("#propertiesPercentageProgressbar").css({ width: dsf });
+                $('#records_table tbody').empty();
+                var trHTML = '';              
+                dataPoints = aData[9];
+                setCarousel(dataPoints);
+                loopCount = 0;
+                firstPlace = 0;
+                secondPlace = 1;
+                theirthPlace = 2;
+                forthPlace = 3;
+
+                $.each(aData[9], function (i, item) {
+                    if (item.Label.toLowerCase().trim() == 'public open space') {
+                        $("#demo").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "yellow", colorAlpha: 3, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'roads') {
+                        $("#demo1").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "red", colorAlpha: 2, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'agriculture') {
+                        $("#demo2").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    }
+                    if (item.Label.toLowerCase().trim() == 'special') {
+                        $("#demo3").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                    }
+                    trHTML += '<tr><td>' + item.Label + '</td><td>' + item.Y + '</td><td>' + item.Total + '</td></tr>';
+                });
+                $('#records_table').append(trHTML);          
+            },
+            error: function (jqXHR, exception) {
+                var msg = '';
+            }
+        });
+    });
+    $.ajax({
+        type: "POST",
+        url: "/Home/NewChart",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (chData) {
+            var aData = chData;
+            $('#records_table tbody').empty();
+            var trHTML = '';
+            dataPoints = aData[9];
+            setCarousel(dataPoints);
+            loopCount = 0;
+            firstPlace = 0;
+            secondPlace = 1;
+            theirthPlace = 2;
+            forthPlace = 3;
+            $.each(aData[9], function (i, item) {
+                if (item.Label.toLowerCase().trim() == 'public open space') {
+                    $("#demo").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "yellow", colorAlpha: 3, bgcolor: "#696969", type: "default" });
+                }
+                if (item.Label.toLowerCase().trim() == 'roads') {
+                    $("#demo1").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "red", colorAlpha: 2, bgcolor: "#696969", type: "default" });
+                }
+                if (item.Label.toLowerCase().trim() == 'agriculture') {
+                    $("#demo2").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "white", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                }
+                if (item.Label.toLowerCase().trim() == 'special') {
+                    $("#demo3").gauge(item.Y, { min: 0, max: item.Total, unit: "/" + item.Total, color: "orange", colorAlpha: 1, bgcolor: "#696969", type: "default" });
+                }
+                trHTML += '<tr><td>' + item.Label + '</td><td>' + item.Y + '</td><td>' + item.Total + '</td></tr>';
+            });
+            $('#records_table').append(trHTML);            
+        }
+    });
+</script>
