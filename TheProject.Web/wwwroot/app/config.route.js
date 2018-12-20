@@ -15,6 +15,10 @@
          }).when('/addPortfolio', {
                 controller: 'AddPortfolioController',
                 templateUrl: viewBase + '/portfolio/add.portfolio.html',
+            })
+            .when('/login', {
+                controller: 'LoginController',
+                templateUrl: viewBase + '/login/login.html',
             }).when('/viewBuildings', {
                 controller: 'ViewBuildingsController',
                 templateUrl: viewBase + '/building/view.buildings.html',
@@ -33,8 +37,21 @@
             }).when('/viewClients', {
                 controller: 'ViewClientsController',
                 templateUrl: viewBase + '/client/view.clients.html',
-            }).when('/portfoliomapview', {
-                controller: 'MapViewPortfoliosController',
+            })
+            .when('/dashboard', {
+                controller: 'DashboardController',
+                templateUrl: viewBase + '/dashboard/dashboard.html',
+            })
+            .when('/report', {
+                controller: 'ReportController',
+                templateUrl: viewBase + '/report/report.html',
+            })
+            .when('/viewreport', {
+                controller: 'ViewReportController',
+                templateUrl: viewBase + '/report/viewreport/viewreport.html',
+            })
+            .when('/portfoliomapview', {
+                controller: 'ViewPortfoliosController',
                 templateUrl: viewBase + '/mapview/portfolio/view.portfolio.html',
             }).otherwise({ redirectTo: '/' });
     }

@@ -1,10 +1,52 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<div class="starter-template">
+    <div>
+        <div class="col-md-6">
+            <div class="card-block login-left-div" style="padding-left: 5%;">
+                <br /><br /><br />
+                <img src="../../../assets/img/ic_app.png">
+                <br />
+            </div>
+        </div>
+        <div class="col-md-6 login-right">
+            <div class="row login-right-div left-div">
+                <div class="col-md-12">
+                    <section>
+                        <form name="loginForm">
+                            <br /><br /><br />
+                            <h4 style="color: lightgray;text-align:center">Sign in with your account.</h4>
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <label style="color: lightgray !important;font-size:medium !important">Username</label>
+                                    <input type="text" class="form-control-input" required ng-model="user.username" name="username" placeholder="Username" />
+                                    <div ng-messages="loginForm.username.$error" ng-if="formSubmitted">
+                                        <div ng-message="required" style="color: red;">The field above is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <label style="color: lightgray !important;font-size:medium !important;">Password</label>
+                                    <input type="password" class="form-control-input" required name="password" ng-model="user.password" placeholder="Password" />
+                                    <div ng-messages="loginForm.password.$error" ng-if="formSubmitted">
+                                        <div ng-message="required" style="color: red;">The field above is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" ng-click="login(user)" value="Log in" style="margin-top: 20px; width: 50%;" class="btn btn-default" />
+                                    <div ng-if="invalidLogin && formSubmitted" style="color: red; padding: 10px;">
+                                        The field above is required.
+                                    </div>
 
-</body>
-</html>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

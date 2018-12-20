@@ -15,6 +15,34 @@
                 });
 
             return defered.promise;
+        }  
+
+        var getDashboardData = function () {
+            var defered = $q.defer();
+            var getDashboardDataComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            $http.get(projectApi + '/Portfolio/GetDashboardData')
+                .then(getDashboardDataComplete, function (err, status) {
+                    defered.reject(err);
+                });
+
+            return defered.promise;
+        } 
+
+        var getSubmittedFacilities = function () {
+            var defered = $q.defer();
+            var getSubmittedFacilitiesComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            $http.get(projectApi + '/Facility/GetSubmittedFacilities')
+                .then(getSubmittedFacilitiesComplete, function (err, status) {
+                    defered.reject(err);
+                });
+
+            return defered.promise;
         }
 
 
@@ -207,6 +235,33 @@
             return defered.promise;
         }
 
+        var loginUser = function (user) {
+            var defered = $q.defer();
+            var getClientsComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            $http.get(projectApi + '/User/Login?username=' + user.username + '&password=' + user.password)
+                .then(getClientsComplete, function (err, status) {
+                    defered.reject(err);
+                });
+
+            return defered.promise;
+        }
+
+        var downloadFacilityReport = function (clientCode) {
+
+            var defered = $q.defer();
+            var downloadFacilityReportComplete = function (response) {
+                defered.resolve(response.data);
+            }
+            $http.get(projectApi + '/Facility/DownloadFacility?clientCode=' + clientCode, { responseType: 'arraybuffer' }).then(downloadFacilityReportComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
         return {
             getPortfolios: getPortfolios,
             addPortfolio: addPortfolio,
@@ -220,7 +275,11 @@
             getPotfoliosbyClientId: getPotfoliosbyClientId,
             getBuildings: getBuildings,
             updateBuilding: updateBuilding,
-            getUnassignedFacilities: getUnassignedFacilities
+            getUnassignedFacilities: getUnassignedFacilities,
+            loginUser: loginUser,
+            getSubmittedFacilities: getSubmittedFacilities,
+            downloadFacilityReport: downloadFacilityReport,
+            getDashboardData: getDashboardData
         };
 
     }

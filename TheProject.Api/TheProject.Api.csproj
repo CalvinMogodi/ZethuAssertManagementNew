@@ -287,6 +287,10 @@
       <Project>{de5fb03b-0668-4629-bb7e-a9019b5b1be6}</Project>
       <Name>TheProject.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TheProject.ReportGenerator\TheProject.ReportGenerator.csproj">
+      <Project>{7198DD4A-BB06-4F5B-A0F8-A3DF737736E1}</Project>
+      <Name>TheProject.ReportGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -302,11 +306,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63785</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63785/</IISUrl>
+          <IISUrl>http://localhost:63786/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -57,23 +57,24 @@
     </div>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
-    <nav class="navbar">
+    <nav class="navbar" ng-if="isLoggedin">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a class="navbar-brand" href="index.html">Zethu Consulting Services </a>
             </div>
+            <label class="logout" ng-click="logout()">Logout</label>
 
         </div>
     </nav>
     <!-- #Top Bar -->
-    <section>
+    <section ng-show="isLoggedin">
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- #User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="assets/img/ic_app.png" alt="Logo" style="margin-left:40px;height:130px;width:130px" />
+                    <img src="assets/img/ic_app.png" alt="Logo" style="margin-left:40px;height: 50%; width: 80%; -webkit-border-radius: 0% !important;border-radius: 0% !important;" />
                 </div>
             </div>
             <!-- Menu -->
@@ -81,6 +82,12 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
+                        <a>
+                            <i class="material-icons">home</i>
+                            <span ng-click="navigateTo('/dashboard')">Dashboard</span>
+                        </a>
+                    </li>
+                    <!--<li class="active">
                         <a class="menu-toggle">
                             <i class="material-icons">widgets</i>
                             <span>Clients</span>
@@ -93,7 +100,7 @@
                                 <a href="" ng-click="navigateTo('/viewClients')">View Views</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
                         <a class="menu-toggle">
                             <i class="material-icons">widgets</i>
@@ -108,7 +115,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <!--<li>
                         <a class="menu-toggle">
                             <i class="material-icons">text_fields</i>
                             <span>Portfolio</span>
@@ -149,7 +156,7 @@
                                 <a href="" ng-click="navigateTo('/viewBuildings')">View Buildings</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
                         <a class="menu-toggle">
                             <i class="material-icons">location_on</i>
@@ -159,13 +166,19 @@
                             <li>
                                 <a href="" ng-click="navigateTo('/portfoliomapview')">Portfolio</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="" ng-click="navigateTo('/portfoliomapview')">Property Usage</a>
                             </li>
                             <li>
                                 <a href="" ng-click="navigateTo('/portfoliomapview')">Region</a>
-                            </li>
+                            </li>-->
                         </ul>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="material-icons">location_on</i>
+                            <span ng-click="navigateTo('/report')">Reports</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -173,7 +186,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2018 <a href="javascript:void(0);">The Project</a>.
+                    &copy; 2018 <a href="javascript:void(0);">Zethu Consulting Services</a>.
                 </div>
                 <div class="version">
                     <b>Version: </b> 1.0.0
@@ -185,6 +198,7 @@
         <!-- Right Sidebar -->
         <!-- #END# Right Sidebar -->
     </section>
+
     <section class="content">
         <div class="container-fluid">
             <ng-view></ng-view>
@@ -218,6 +232,10 @@
     <script src="app/components/client/addClient.controller.js"></script>
     <script src="app/components/client/viewclients.controller.js"></script>
     <script src="app/components/mapview/portfolio/view.portfolio.controller.js"></script>
+    <script src="app/components/login/login.controller.js"></script>
+    <script src="app/components/dashboard/dashboard.controller.js"></script>
+    <script src="app/components/report/viewreport/viewreport.controller.js"></script>
+    <script src="app/components/report/report.controller.js"></script>
     <!-- Jquery Core Js -->
     <script src="assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core Js -->

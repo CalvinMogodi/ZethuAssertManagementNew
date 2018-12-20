@@ -1,8 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function indexController($location, $scope, $rootScope,$sessionStorage) {
-
+    function indexController($location, $scope, $rootScope, $sessionStorage, $window) {
         $scope.isLoggedin = $sessionStorage.isUserAuthenticated;
         $scope.navigateTo = function (url) {
             $location.path(url);
@@ -14,9 +13,18 @@
             if ($location.path() == '/index' || $location.path() == '/') {
                 $location.path('/index');
             }
+            if (!$sessionStorage.isUserAuthenticated) {
+                $location.path('/login');
+            }     
+        }
+
+        $scope.logout = function () {
+            $window.location.reload();
+            $sessionStorage.isUserAuthenticated = false;            
+            $location.path('/login');
         }
     }
 
     angular.module('TheApp').controller('indexController', indexController);
-    indexController.$inject = ['$location', '$scope', '$rootScope','$sessionStorage'];
+    indexController.$inject = ['$location', '$scope', '$rootScope', '$sessionStorage', '$window'];
 })();

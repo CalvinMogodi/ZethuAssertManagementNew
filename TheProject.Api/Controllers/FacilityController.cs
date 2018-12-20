@@ -1,16 +1,19 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TheProject.Api.Models;
 using TheProject.Data;
 using TheProject.Model;
+using TheProject.ReportGenerator;
 
 namespace TheProject.Api.Controllers
 {
@@ -270,6 +273,103 @@ namespace TheProject.Api.Controllers
                 ErrorHandling.LogError(ex.StackTrace, "GetBuildings");
                 throw ex;
             }
+        }
+
+        [HttpGet]
+        public List<Facility> GetSubmittedFacilities()
+        {
+
+            try
+            {
+                using (ApplicationUnit unit = new ApplicationUnit())
+                {
+                    var dbfacilities = unit.Facilities.GetAll()
+                                          .Include(b => b.Buildings)
+                                          .Include(d => d.DeedsInfo)
+                                          .Include(p => p.ResposiblePerson)
+                                          .Include("Location.GPSCoordinates")
+                                          .Include("Location.BoundryPolygon")
+                                          .Where(ss => ss.Status == "Submitted")
+                                          .ToList();
+                    List<Facility> facilities = new List<Facility>();
+                    foreach (var item in dbfacilities)
+                    {
+                        facilities.Add(new Facility
+                        {
+                            ClientCode = item.ClientCode,
+                            SettlementType = item.SettlementType,
+                            Zoning = item.Zoning,
+                        });
+                    }
+                    return facilities;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
+        }
+
+
+        [HttpGet]
+        public HttpResponseMessage DownloadFacility(string clientCode)
+        {
+            try
+            {
+                FacilityReport facilityReport = new FacilityReport();
+                using (ApplicationUnit unit = new ApplicationUnit())
+                {
+                    Model.Facility dbFacility = unit.Facilities.GetAll()
+                                            .Include(b => b.Buildings)
+                                            .Include(d => d.DeedsInfo)
+                                            .Include(c => c.Portfolio)
+                                            .Include(p => p.ResposiblePerson)
+                                            .Include("Location.GPSCoordinates")
+                                            .Include("Location.BoundryPolygon")
+                                            .Where(f => f.ClientCode.ToLower() == clientCode.ToLower()).FirstOrDefault();
+
+                    Model.OriginalData dbOriginalData = unit.OriginalDatas.GetAll()
+                        .Where(o => o.VENUS_CODE.Trim().ToLower()
+                        == dbFacility.ClientCode.Trim().ToLower())
+                        .FirstOrDefault();
+
+                    string filePath = facilityReport.GenerateFacilityReport(dbFacility, dbOriginalData);
+
+                    using (var webClient = new WebClient())
+                    {
+                        if (!System.IO.File.Exists(filePath))
+                        {
+                            return null;
+                        }
+                        byte[] file = webClient.DownloadData(filePath);
+                        DeleteAllFile();
+
+                        HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
+                        response.Content = new ByteArrayContent(file);
+                        return response;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
+        }       
+
+        private void DeleteAllFile()
+        {
+
+            string _currpath = ConfigurationManager.AppSettings["ReportsPath"];
+            DirectoryInfo di = new DirectoryInfo(_currpath);
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+
         }
 
         [HttpGet]

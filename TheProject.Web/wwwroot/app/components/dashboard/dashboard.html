@@ -1,0 +1,101 @@
+﻿<div class="clearfix margin-55">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 width-100">
+            <label class="header2">Dashboard</label>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-building" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="PropertiesCount">{{items.PropertiesCount}}</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Number of properties</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-building" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="PropertiesPercentage">{{items.PropertiesPercentage}}</span>%</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Signed off properties</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-tree" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="vacantPercentage">{{items.VacantPercentage}}</span>%</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Vacant Status</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <i style="font-size: xx-large;" class="fa fa-building" aria-hidden="true"></i>
+                    <div class="dashboard-number" style="color:#FFFFFF" id="noOfImprovements">{{items.NoOfImprovements}}</div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Number of improvements</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <div class="dashboard-icon"><i style="font-size: xx-large;" class="fa fa-level-up" aria-hidden="true"></i></div>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="ImprovementsSize">{{items.ImprovementsSize}}</span><span>m&#178;</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Size of improvements</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12 width-100">
+            <div class="dashboard-card" style="background-color: #101e45; color:#FFFFFF">
+                <div class="card-body" style="color:#FFFFFF; text-align: center; padding: 7px 10px;">
+                    <div class="dashboard-icon"><i style="font-size: xx-large; color:#FFFFFF" class="fa fa-arrows-h" aria-hidden="true"></i></div>
+                    <div class="dashboard-number" style="color:#FFFFFF"><span id="OccupationStatus">{{items.OccupationStatus}}</span><span>%</span></div>
+                    <div class="dashboard-text" style="color:#FFFFFF">Occupation Status</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix margin-55">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 width-100">
+            <label class="header2">Property Type / Zoning</label>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix margin-55">
+    <div class="col-lg-12" id="propertyTypeTableDiv">
+        <div class="col-lg-12" style="background-color: lightgray;border-radius: .55rem; margin-bottom: 30px; transition: .5s; border: 0;    padding: 15px;
+                        position: relative;
+                        width: 100%;
+                            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);">
+
+            <table class="table table-hover" id="records_table">
+                <thead style="background-color: #101e45;color: white;">
+                    <tr>
+                        <th>Property Type</th>
+                        <th>Signed Off</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items.DataPoints">
+                        <td>{{item.label}}</td>
+                        <td>{{item.y}}</td>
+                        <td>{{item.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

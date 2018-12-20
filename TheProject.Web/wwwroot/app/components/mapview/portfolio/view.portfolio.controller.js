@@ -30,7 +30,7 @@
         vm.search = function (str) {
             var d = $q.defer();
             vm.places.textSearch({ query: str }, function (results, status) {
-                if (status == 'OK') {
+                if (status === 'OK') {
                     d.resolve(results[0]);
                 }
                 else d.reject(status);
