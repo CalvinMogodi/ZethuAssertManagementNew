@@ -1,11 +1,15 @@
 ﻿(function () {
     'use strict';
 
-    function AddUserController($location, $scope, TheProjectService) {
+    function AddUserController($location, $scope, TheProjectService, $sessionStorage) {
         $scope.hidePassword = false;
         $scope.user = TheProjectService.getSelectedUser();
         init();
         function init() {
+
+            if ($sessionStorage.userType != 'Admin') {
+                $location.path('/dashboard');
+            }
             if ($scope.user.Id != undefined) {
                 $scope.hidePassword = true;
                 TheProjectService.getUnassignedFacilities(function (data) {
@@ -34,5 +38,5 @@
     }
 
     angular.module('TheApp').controller('AddUserController', AddUserController);
-    AddUserController.$inject = ['$location', '$scope', 'TheProjectService'];
+    AddUserController.$inject = ['$location', '$scope', 'TheProjectService', '$sessionStorage'];
 })();

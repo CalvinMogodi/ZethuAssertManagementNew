@@ -1,11 +1,14 @@
 ﻿(function () {
     'use strict';
 
-    function ViewUsersController($location, $scope, TheProjectService, $filter) {
+    function ViewUsersController($location, $scope, TheProjectService, $filter, $sessionStorage) {
 
         init();
 
         function init() {
+
+            
+
             TheProjectService.getUsers(function (data) {
                 if (data) {
                     $scope.items = data;
@@ -113,13 +116,15 @@
         };
 
         $scope.viewUser = function (user) {
-            TheProjectService.setSelectedUser(user);
-            $location.path('/addUser');
+            if ($sessionStorage.userType == 'Admin') {
+                TheProjectService.setSelectedUser(user);
+                $location.path('/addUser');
+            }             
         }
     }
 
     angular.module('TheApp').controller('ViewUsersController', ViewUsersController);
-    ViewUsersController.$inject = ['$location', '$scope', 'TheProjectService','$filter'];
+    ViewUsersController.$inject = ['$location', '$scope', 'TheProjectService', '$filter', '$sessionStorage'];
 })();
 
 

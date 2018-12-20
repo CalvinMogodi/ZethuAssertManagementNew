@@ -8210,3 +8210,21 @@ h3 img {
         background: url("http://oi58.tinypic.com/2emfu9w.jpg") center center no-repeat;
     }
 
+.carousel-background {
+    background: #101e45;
+    border-radius: .55rem;
+    margin-bottom: 30px;
+    transition: .5s;
+    border: 0;
+    position: relative;
+    width: 100%;
+    box-shadow:;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
+}
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+

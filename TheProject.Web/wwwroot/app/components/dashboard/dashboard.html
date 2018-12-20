@@ -64,7 +64,30 @@
         </div>
     </div>
 </div>
-
+<div id="carouselExampleControls" class="carousel slide carousel-background">
+    <div class="carousel-inner">
+        <i ng-click="carouselPrevious(items.DataPoints)" class="fa fa-chevron-left carousel-control-prev-icon" style="color: white;font-size: xx-large;position: absolute; cursor:pointer; margin-top: 9%;" aria-hidden="true" id="carouselPrevious"></i>
+        <div class="row clearfix carousel-item" style="width: 93% !important; margin-bottom: 15px; margin-left: 40px;">
+            <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                <canvas id="demo" width="200" height="200"></canvas><br />
+                                                                    <label class="propertyDescription" style="color: yellow" id="demoText">{{demo}}</label>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                <canvas id="demo1" width="200" height="200"></canvas><br />
+                                                                     <label class="propertyDescription" style="color: red" id="demo1Text">{{demo1}}</label>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                <canvas id="demo2" width="200" height="200"></canvas><br />
+                                                                     <label class="propertyDescription" style="color: white" id="demo2Text">{{demo2}}</label>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 width-100" style="text-align: center;">
+                <canvas id="demo3" width="200" height="200"></canvas><br />
+                                                                     <label class="propertyDescription" style="color: orange" id="demo3Text">{{demo3}}</label>
+            </div>
+        </div>
+        <i ng-click="setCarousel(items.DataPoints)" class="fa fa-chevron-right carousel-control-next-icon" style="color: white; font-size: xx-large;float: right; cursor:pointer; margin-top: -10%;" aria-hidden="true" id="carouselNext"></i>
+    </div>
+</div>
 <div class="clearfix margin-55">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 width-100">
@@ -99,3 +122,4 @@
         </div>
     </div>
 </div>
+

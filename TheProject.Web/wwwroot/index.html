@@ -20,6 +20,7 @@
     <link href="assets/css/themes/all-themes.css" rel="stylesheet" />
     <link href="assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     <link href='assets/css/loading-bar.css' rel='stylesheet' />
     <link href="assets/plugins/multi-select/css/multi-select.css" rel="stylesheet" />
 
@@ -107,7 +108,7 @@
                             <span>Users</span>
                         </a>
                         <ul class="ml-menu">
-                            <li>
+                            <li ng-show="isAdmin">
                                 <a href="" ng-click="navigateTo('/addUser')">Add User</a>
                             </li>
                             <li>
@@ -236,9 +237,10 @@
     <script src="app/components/dashboard/dashboard.controller.js"></script>
     <script src="app/components/report/viewreport/viewreport.controller.js"></script>
     <script src="app/components/report/report.controller.js"></script>
-    <!-- Jquery Core Js -->
+    <!-- Jquery Core Js-->
     <script src="assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap Core Js -->
+    <script src="assets/js/jquery.gauge.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.js"></script>
     <!-- Select Plugin Js -->
     <script src="assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>

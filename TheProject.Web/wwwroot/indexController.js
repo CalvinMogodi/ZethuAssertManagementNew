@@ -11,16 +11,24 @@
         $rootScope.$on('$locationChangeSuccess', routeChanged);
         function routeChanged(evt, newUrl, oldUrl) {
             if ($location.path() == '/index' || $location.path() == '/') {
-                $location.path('/index');
+                $location.path('/dashboard');
             }
             if (!$sessionStorage.isUserAuthenticated) {
                 $location.path('/login');
-            }     
+            }    
+
+            if ($sessionStorage.userType == 'Admin') {
+                $scope.isAdmin = true;
+            } else {
+                $scope.isAdmin = false;
+            }
+           
         }
 
         $scope.logout = function () {
             $window.location.reload();
-            $sessionStorage.isUserAuthenticated = false;            
+            $sessionStorage.isUserAuthenticated = false;     
+            $sessionStorage.userType = "";
             $location.path('/login');
         }
     }

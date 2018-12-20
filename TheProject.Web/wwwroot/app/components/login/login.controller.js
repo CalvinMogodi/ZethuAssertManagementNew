@@ -21,6 +21,7 @@
                 TheProjectService.loginUser(user, function (data) {
                     if (data) {
                         $sessionStorage.isUserAuthenticated = true;
+                        $sessionStorage.userType = data.Role;                        
                         $location.path('/dashboard');
                         $window.location.reload();
                     } else {
