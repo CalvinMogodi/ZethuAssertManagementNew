@@ -8175,7 +8175,7 @@ h3 img {
 .dashboard-number {
     font-weight: 400;
     color: #616161;
-    font-size: 30px;
+    font-size: 20px;
     padding: 10px;
 }
 
@@ -8201,6 +8201,7 @@ h3 img {
     border: 0;
     position: relative;
     width: 100%;
+    height: 130px;
     box-shadow: 0 1px 4px 0 rgba(0,0,0,0.1);
 }
     .loading-pane .spinner-image {

@@ -19,8 +19,8 @@
                                 <div class="col-md-10">
                                     <label style="color: lightgray !important;font-size:medium !important">Username</label>
                                     <input type="text" class="form-control-input" required ng-model="user.username" name="username" placeholder="Username" />
-                                    <div ng-messages="loginForm.username.$error" ng-if="formSubmitted">
-                                        <div ng-message="required" style="color: red;">The field above is required.</div>
+                                    <div ng-messages="loginForm.username.$error" ng-if="nousername">
+                                        <div ng-message="required" style="color: red;font-weight: 100;">The field above is required.</div>
                                     </div>
                                 </div>
                             </div>
@@ -28,16 +28,16 @@
                                 <div class="col-md-10">
                                     <label style="color: lightgray !important;font-size:medium !important;">Password</label>
                                     <input type="password" class="form-control-input" required name="password" ng-model="user.password" placeholder="Password" />
-                                    <div ng-messages="loginForm.password.$error" ng-if="formSubmitted">
-                                        <div ng-message="required" style="color: red;">The field above is required.</div>
+                                    <div ng-messages="loginForm.password.$error" ng-if="nopassword">
+                                        <div ng-message="required" style="color: red;font-weight: 100;">The field above is required.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" ng-click="login(user)" value="Log in" style="margin-top: 20px; width: 50%;" class="btn btn-default" />
-                                    <div ng-if="invalidLogin && formSubmitted" style="color: red; padding: 10px;">
-                                        The field above is required.
+                                    <div ng-if="invalidLogin" style="color: red;font-weight: 100;">
+                                        Invalid username or password.
                                     </div>
 
                                 </div>

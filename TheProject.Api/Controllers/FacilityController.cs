@@ -380,7 +380,7 @@ namespace TheProject.Api.Controllers
                 List<MapCoordinate> mapCoordinates = new List<MapCoordinate>();
                 using (ApplicationUnit unit = new ApplicationUnit())
                 {
-                    IEnumerable<Facility> facilities = unit.Facilities.GetAll().Where(f => f.Portfolio.Id == portfolioId)
+                    IEnumerable<Facility> facilities = unit.Facilities.GetAll().Where(f => f.Portfolio.Id == portfolioId && f.Status == "Submitted")
                         .Include(c => c.Location).Include(f => f.Location.GPSCoordinates).ToList();
 
                     foreach (var facility in facilities)
