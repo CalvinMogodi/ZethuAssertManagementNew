@@ -51,7 +51,7 @@
                 templateUrl: viewBase + '/report/viewreport/viewreport.html',
             })
             .when('/portfoliomapview', {
-                controller: 'ViewPortfoliosController',
+                controller: 'MapViewPortfoliosController',
                 templateUrl: viewBase + '/mapview/portfolio/view.portfolio.html',
             }).otherwise({ redirectTo: '/' });
     }
