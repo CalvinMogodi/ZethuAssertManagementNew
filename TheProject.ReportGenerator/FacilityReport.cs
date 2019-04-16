@@ -395,13 +395,21 @@ namespace TheProject.ReportGenerator
 
         private bool CheckNegative(dynamic number)
         {
-            if (number.ToLower().Contains(",") == true)
+            try
             {
-                number = number.Replace(',', '.');
-            }
+                if (number.ToLower().Contains(",") == true)
+                {
+                    number = number.Replace(',', '.');
+                }
 
-            number = Convert.ToDecimal(number);
-            return number < 0;
+                number = Convert.ToDecimal(number);
+                return number < 0;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+            
         }
         private List<Image> GetImages(string iDPicture)
         {

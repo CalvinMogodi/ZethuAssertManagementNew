@@ -10,6 +10,7 @@
 
         $rootScope.$on('$locationChangeSuccess', routeChanged);
         function routeChanged(evt, newUrl, oldUrl) {
+
             if ($location.path() == '/index' || $location.path() == '/') {
                 $location.path('/dashboard');
             }
@@ -22,13 +23,13 @@
             } else {
                 $scope.isAdmin = false;
             }
-           
+            $scope.isLoggedin = $sessionStorage.isUserAuthenticated;
         }
 
-        $scope.logout = function () {
-            $window.location.reload();
+        $scope.logout = function () {           
             $sessionStorage.isUserAuthenticated = false;     
             $sessionStorage.userType = "";
+            $window.location.reload();
             $location.path('/login');
         }
     }
