@@ -177,6 +177,12 @@ namespace TheProject.ReportGenerator
 
             //ERF NO Label and Data
 
+            if (facility.DeedsInfo == null)
+                facility.DeedsInfo = new DeedsInfo();
+
+            if (facility.Location == null)
+                facility.Location = new Location();
+
             PdfPCell erfNoCell = GetCell("ERF NO:", BaseColor.BLACK, BaseColor.LIGHT_GRAY, Font.BOLD);
             PdfPCell erfNoCellData = GetCell(facility.DeedsInfo.ErFNumber, BaseColor.BLACK, BaseColor.WHITE);
 
@@ -350,20 +356,29 @@ namespace TheProject.ReportGenerator
             }
 
             string imageUrl = "";
-
-            if (CheckNegative(facility.Location.GPSCoordinates.Longitude.Trim()))
-                imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&zoom=18&size=600x300&maptype=satellite&markers=color:red%7Clabel:S%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&markers=color:green%7Clabel:G%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&markers=color:red%7Clabel:C%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim();
-            else
-                imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&zoom=18&size=600x300&maptype=satellite&markers=color:red%7Clabel:S%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&markers=color:green%7Clabel:G%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&markers=color:red%7Clabel:C%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim();
             Image locatonImage = null;
-            try
+
+            if (facility.Location.GPSCoordinates != null)
             {
-                locatonImage = Image.GetInstance(imageUrl);
+                if (CheckNegative(facility.Location.GPSCoordinates.Longitude.Trim()))
+                    imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&zoom=18&size=600x300&maptype=satellite&markers=color:red%7Clabel:S%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&markers=color:green%7Clabel:G%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim() + "&markers=color:red%7Clabel:C%7C" + facility.Location.GPSCoordinates.Longitude.Trim() + "," + facility.Location.GPSCoordinates.Latitude.Trim()+ "&key=AIzaSyCME2KGL3biqhYGWKurDBl8Jl-umo4YefQ&region=ZAF";
+                else
+                    imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&zoom=18&size=600x300&maptype=satellite&markers=color:red%7Clabel:S%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&markers=color:green%7Clabel:G%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&markers=color:red%7Clabel:C%7C" + facility.Location.GPSCoordinates.Latitude.Trim() + "," + facility.Location.GPSCoordinates.Longitude.Trim() + "&key=AIzaSyCME2KGL3biqhYGWKurDBl8Jl-umo4YefQ&region=ZAF";
+                
+                try
+                {
+                    locatonImage = Image.GetInstance(imageUrl);
+                }
+                catch (Exception ex)
+                {
+                    locatonImage = null;
+                }
             }
-            catch (Exception ex)
-            {
+            else {
                 locatonImage = null;
             }
+
+            
              
             var sketachCell = new PdfPCell
             {

@@ -45,6 +45,20 @@
             return defered.promise;
         }
 
+        
+        var getFacilitiesForReport = function () {
+            var defered = $q.defer();
+            var getFacilitiesForReportComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            $http.get(projectApi + '/Facility/GetFacilitiesForReport')
+                .then(getFacilitiesForReportComplete, function (err, status) {
+                    defered.reject(err);
+                });
+
+            return defered.promise;
+        }
 
         var addPortfolio = function (portfolio) {
             var defered = $q.defer();
@@ -279,7 +293,8 @@
             loginUser: loginUser,
             getSubmittedFacilities: getSubmittedFacilities,
             downloadFacilityReport: downloadFacilityReport,
-            getDashboardData: getDashboardData
+            getDashboardData: getDashboardData,
+            getFacilitiesForReport: getFacilitiesForReport
         };
 
     }

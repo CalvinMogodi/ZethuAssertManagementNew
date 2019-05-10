@@ -151,6 +151,16 @@
             });
         }
 
+        self.getFacilitiesForReport = function (callback) {
+            TheProjectFactory.getFacilitiesForReport().then(function (response) {
+                callback(response);
+            }, function (error) {
+                //alertDialogService.setHeaderAndMessage('Error Has Occurred ', 'Unable to get contracts. Please retry again, if the issue persists contact administrator.');
+                //var templateUrl = '/app/common/alert/infoDialog.template.html';
+                //modal.show(templateUrl, 'alertDialogController');
+            });
+        }
+        
         self.getUnassignedFacilities = function (callback) {
             TheProjectFactory.getUnassignedFacilities().then(function (response) {
                 callback(response);

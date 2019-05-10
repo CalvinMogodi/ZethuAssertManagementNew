@@ -312,6 +312,37 @@ namespace TheProject.Api.Controllers
             
         }
 
+        [HttpGet]
+        public List<Facility> GetFacilitiesForReport()
+        {
+
+            try
+            {
+                using (ApplicationUnit unit = new ApplicationUnit())
+                {
+                    var dbfacilities = unit.Facilities.GetAll().Where(ss => ss.Status == "Submitted")
+                                          .ToList();
+                    List<Facility> facilities = new List<Facility>();
+                    foreach (var item in dbfacilities)
+                    {
+                        facilities.Add(new Facility
+                        {
+                            ClientCode = item.ClientCode,
+                            SettlementType = item.SettlementType,
+                            Zoning = item.Zoning,
+                        });
+                    }
+                    return facilities;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+
 
         [HttpGet]
         public HttpResponseMessage DownloadFacility(string clientCode)
@@ -334,6 +365,9 @@ namespace TheProject.Api.Controllers
                         .Where(o => o.VENUS_CODE.Trim().ToLower()
                         == dbFacility.ClientCode.Trim().ToLower())
                         .FirstOrDefault();
+
+                    if (dbOriginalData == null)
+                        dbOriginalData = new OriginalData();
 
                     string filePath = facilityReport.GenerateFacilityReport(dbFacility, dbOriginalData);
 

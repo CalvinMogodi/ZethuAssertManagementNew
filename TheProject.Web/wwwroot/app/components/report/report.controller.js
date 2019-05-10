@@ -5,7 +5,7 @@
         init();
 
         function init() {
-            TheProjectService.getSubmittedFacilities(function (data) {
+            TheProjectService.getFacilitiesForReport(function (data) {
                 if (data) {
                     $scope.items = data;
 
