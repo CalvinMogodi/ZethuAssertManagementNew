@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -16,8 +17,7 @@ namespace TheProject.Api.Controllers
 {
     public class BuildingController : ApiController
     {
-
-        string _picturePath = HttpContext.Current.Server.MapPath("~/UploadPictures");
+        string _picturePath = ConfigurationManager.AppSettings["UploadPictures"];
         [HttpPost]
         public HttpResponseMessage AddBuilding(Building building)
         {

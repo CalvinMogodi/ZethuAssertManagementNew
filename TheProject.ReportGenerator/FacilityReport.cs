@@ -435,8 +435,8 @@ namespace TheProject.ReportGenerator
                 for (int i = 0; i < pictures.Length; i++)
                 {
                     string imagesLocation = ConfigurationManager.AppSettings["PicturesPath"];
-
-                    if (File.Exists(imagesLocation + pictures[i] + ".png"))
+                    string imagePath = Path.Combine(imagesLocation + pictures[i] + ".png");
+                    if (File.Exists(imagePath))
                     {
                         images.Add(Image.GetInstance(imagesLocation + pictures[i] + ".png"));
                     }

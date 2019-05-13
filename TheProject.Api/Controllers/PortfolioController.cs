@@ -69,7 +69,9 @@ namespace TheProject.Api.Controllers
 
                     decimal value3 = Convert.ToDecimal(occupationStatus);
                     decimal value4 = noOfImprovements;
-                    decimal div1 = decimal.Divide(value3, value4);
+                    decimal div1 = 0;
+                    if (value4 > 0)
+                        div1 = decimal.Divide(value3, value4);
 
                     List<DataPoint> dataPoints = GetZoning(SubmittedFacilities, facilities);
 
@@ -117,7 +119,8 @@ namespace TheProject.Api.Controllers
             foreach (var item in zonings)
             {
                 if (!StringIsInList(sortedZonings, item))
-                    sortedZonings.Add(item);
+                    if (item != null)
+                        sortedZonings.Add(item);
             }
             List<Facility> newfacilities = new List<Facility>();
             foreach (var item in facilities)
