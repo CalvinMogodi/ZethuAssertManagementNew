@@ -7,6 +7,7 @@ using System.IO;
 using System.Web;
 using TheProject.Model;
 using System.Linq;
+using TheProject.Data;
 
 namespace TheProject.ReportGenerator
 {
@@ -371,6 +372,7 @@ namespace TheProject.ReportGenerator
                 }
                 catch (Exception ex)
                 {
+                    LogError(ex.StackTrace, "Maps");
                     locatonImage = null;
                 }
             }
@@ -422,7 +424,7 @@ namespace TheProject.ReportGenerator
             }
             catch (Exception)
             {
-                return true;
+                return false;
             }
             
         }
@@ -676,6 +678,21 @@ namespace TheProject.ReportGenerator
             }
 
             return table;
+        }
+
+        public static void LogError(string errorMessase, string source)
+        {
+            using (ApplicationUnit unit = new ApplicationUnit())
+            {
+                ErrorLog errorLog = new ErrorLog
+                {
+                    Date = DateTime.Now,
+                    ErrorMessage = errorMessase,
+                    Source = source
+                };
+                unit.ErrorLogs.Add(errorLog);
+                unit.SaveChanges();
+            }
         }
 
         private PdfPCell GetCell(string data, BaseColor baseColor, BaseColor backgroundColor, int style = Font.NORMAL)

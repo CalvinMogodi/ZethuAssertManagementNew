@@ -306,8 +306,8 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                ErrorHandling.LogError(ex.StackTrace, "GetSubmittedFacilities");
+                throw ex;
             }
             
         }
@@ -337,8 +337,8 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                ErrorHandling.LogError(ex.StackTrace, "GetFacilitiesForReport");
+                throw ex;
             }
 
         }
@@ -388,8 +388,8 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                ErrorHandling.LogError(ex.StackTrace, "DownloadFacility");
+                throw ex;
             }
             
         }       
@@ -437,6 +437,7 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
+                ErrorHandling.LogError(ex.StackTrace, "GetFacilitiesByPortfolioId");
                 throw ex;
             }
 
@@ -503,10 +504,10 @@ namespace TheProject.Api.Controllers
                     unit.SaveChanges();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ErrorHandling.LogError(ex.StackTrace, "LogAuditTrail");
+                throw ex;
             }
         }
     }

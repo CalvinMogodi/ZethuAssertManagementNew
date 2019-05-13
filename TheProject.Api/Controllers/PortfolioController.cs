@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TheProject.Api.Models;
 using TheProject.Data;
 using TheProject.Model;
 
@@ -42,6 +43,7 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
+                ErrorHandling.LogError(ex.StackTrace, "AddPortfolio");
                 throw ex;
             }
         }
@@ -91,6 +93,7 @@ namespace TheProject.Api.Controllers
             }
             catch (Exception ex)
             {
+                ErrorHandling.LogError(ex.StackTrace, "GetDashboardData");
                 throw ex;
             }
         }
